@@ -1,0 +1,57 @@
+{
+  "name": "bloomskill-backend",
+  "version": "1.0.0",
+  "description": "site for booking event",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bloomskill/bloomskill_backend.git"
+  },
+  "keywords": [],
+  "author": "Brand-Maze",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/bloomskill/bloomskill_backend/issues"
+  },
+  "homepage": "https://github.com/bloomskill/bloomskill_backend#readme",
+  "dependencies": {
+    "axios": "^1.6.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "http-errors": "^2.0.0",
+    "index.js": "^0.0.3",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.4",
+    "mongoose": "^7.6.4",
+    "mongoose-type-email": "^1.1.2",
+    "mongoose-type-url": "^2.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.7",
+    "nodemailer-direct-transport": "^3.3.2",
+    "request": "^2.88.2",
+    "touch": "^3.1.0",
+    "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "eslint": "^8.53.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.22"
+  }
+}
