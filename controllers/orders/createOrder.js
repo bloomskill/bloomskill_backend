@@ -98,7 +98,7 @@ const createOrder = async (req, res, next) => {
       });
 
       const from = "BloomSkill Event <bloomskill.fr@gmail.com>";
-      const to = `bloomskill.fr@gmail.com, vlad_np@ukr.net, ${resSpecialist?.email}`; // list of receivers
+      const to = `bloomskill.fr@gmail.com, ${resSpecialist?.email}`; // list of receivers
 
       transporter.sendMail(
         {
