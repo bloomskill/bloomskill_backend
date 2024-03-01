@@ -1,6 +1,6 @@
 const { ValidationError } = require('../../helpers');
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 let path = require('path');
 
 const { Users } = require('../../models');
