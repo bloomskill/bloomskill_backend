@@ -86,6 +86,21 @@ const createOrder = async (req, res, next) => {
         htmlLetterContext = `<h3>Дорогой специалист,</h3><p>Мы получили новый запрос на регистрацию на Ваше мероприятие ${nameActiveEvent} ${datectiveEvent} ${timectiveEvent}.</p><p>Детали запроса: <br/>Количество мест: ${newData.bookingSeats},<br/> Имя: ${newData.userName},<br/> E-mail: ${newData.userEmail},<br/>Телефон: ${newData.userPhone}.<p/><p>Вы можете напрямую связаться с тем, кто отправил запрос.<p/><p>Спасибо<p/>`;
       }
 
+      // лист замовнику, який зробив броньування квитків на івент
+
+      let textUserContext = `Cher(e) participant(e),
+      Nous vous remercions de votre intérêt pour notre événement. Votre inscription à ${nameActiveEvent} le ${datectiveEvent} à ${timectiveEvent} a été enregistrée avec succès. La veille de l'événement, vous recevrez un rappel de la rencontre avec l'adresse de la réunion. L'équipe de BloomSkill`;
+      let htmlUserContext = `<h3>Cher(e) participant(e),</h3> <p>Nous vous remercions de votre intérêt pour notre événement.</p><p>Votre inscription à ${nameActiveEvent} le ${datectiveEvent} à ${timectiveEvent} a été enregistrée avec succès.</p><p>La veille de l'événement, vous recevrez un rappel de la rencontre avec l'adresse de la réunion.</p><p>L'équipe de BloomSkill</p>`;
+      if ((updatedData.language === "Ua")) {
+        textUserContext = `Шановний учасник, Дякуємо за зацікавленість до нашої події. Ваша заявка на участь у ${nameActiveEvent} ${datectiveEvent} о ${timectiveEvent} успішно зареєстрована. За день до події ви отримаєте нагадування про зустріч із адресою, за якою відбудеться зустріч. Команда BloomSkill`;
+        htmlUserContext = `<h3>Шановний учасник,</h3> <p>Дякуємо за зацікавленість до нашої події.</p><p>Ваша заявка на участь у ${nameActiveEvent} ${datectiveEvent} о ${timectiveEvent} успішно зареєстрована.</p> <p>За день до події ви отримаєте нагадування про зустріч із адресою, за якою відбудеться зустріч.</p><p>Команда BloomSkill</p> `;
+      }
+      if ((updatedData.language === "Ru")) {
+        textUserContext = `Дорогой участник, Спасибо за интерес к нашему мероприятию. Ваша заявка на участие в ${nameActiveEvent} ${datectiveEvent} в  ${timectiveEvent} была успешно зарегистрирована.
+        За день до мероприятия Вы получите напоминание о встрече с адресом, по которому состоится встреча. Команда BloomSkill`;
+        htmlUserContext = `<h3>Дорогой участник, </h3><p>Спасибо за интерес к нашему мероприятию.</p><p>Ваша заявка на участие в ${nameActiveEvent} ${datectiveEvent} в  ${timectiveEvent} была успешно зарегистрирована.</p><p>За день до мероприятия Вы получите напоминание о встрече с адресом, по которому состоится встреча.</p><p>Команда BloomSkill</p>`;
+      }
+
       const transporter = nodemailer.createTransport({
         service: "gmail",
         host: "smtp.gmail.com",
@@ -99,6 +114,7 @@ const createOrder = async (req, res, next) => {
 
       const from = "BloomSkill Event <bloomskill.fr@gmail.com>";
       const to = `bloomskill.fr@gmail.com, ${resSpecialist?.email}`; // list of receivers
+      const toUser = `bloomskill.fr@gmail.com, ${userEmail}`;
 
       transporter.sendMail(
         {
@@ -107,6 +123,23 @@ const createOrder = async (req, res, next) => {
           subject: "BloomSkill événements - nouvelle demande",
           text: textLetterContext,
           html: htmlLetterContext,
+        },
+        (err, data) => {
+          if (err) {
+            console.error("Error sending:", err);
+          } else {
+            console.log("Letter sent");
+          }
+        }
+      );
+
+      transporter.sendMail(
+        {
+          from,
+          to: toUser,
+          subject: "BloomSkill événements - nouvelle demande",
+          text: textUserContext,
+          html: htmlUserContext,
         },
         (err, data) => {
           if (err) {
